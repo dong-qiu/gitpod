@@ -1,0 +1,3 @@
+./buildtag.go
+./lint.go
+./rules.go

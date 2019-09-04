@@ -1,0 +1,6 @@
+./proc.go
+./proc_linux.go
+./ptrace_linux.go
+./registers_linux_amd64.go
+./threads.go
+./threads_linux.go

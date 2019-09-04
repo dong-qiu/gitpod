@@ -1,0 +1,3 @@
+./core.go
+./linux_amd64_core.go
+./windows_amd64_minidump.go

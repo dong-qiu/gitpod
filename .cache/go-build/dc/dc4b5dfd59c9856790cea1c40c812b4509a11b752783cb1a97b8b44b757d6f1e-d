@@ -1,0 +1,8 @@
+./config.go
+./failure.go
+./file.go
+./formatter.go
+./linter.go
+./package.go
+./rule.go
+./utils.go

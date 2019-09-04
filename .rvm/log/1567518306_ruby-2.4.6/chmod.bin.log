@@ -1,0 +1,25 @@
+[2019-09-03 13:49:34] __rvm_set_executable
+__rvm_set_executable () 
+{ 
+    for __file in "$@";
+    do
+        [[ -x "${__file}" ]] || chmod +x "${__file}";
+    done
+}
+current path: /home/gitpod/.rvm/src/ruby-2.4.6
+PATH=/home/gitpod/.sdkman/candidates/maven/current/bin:/home/gitpod/.sdkman/candidates/java/current/bin:/home/gitpod/.sdkman/candidates/gradle/current/bin:/home/gitpod/.pyenv/bin:/home/gitpod/.pyenv/shims:/home/gitpod/.nvm/versions/node/v10.15.3/bin:/workspace/go/bin:/home/gitpod/go/bin:/home/gitpod/go-packages/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/gitpod/.rvm/bin
+command(8): __rvm_set_executable /home/gitpod/.rvm/rubies/ruby-2.4.6/bin/erb /home/gitpod/.rvm/rubies/ruby-2.4.6/bin/gem /home/gitpod/.rvm/rubies/ruby-2.4.6/bin/irb /home/gitpod/.rvm/rubies/ruby-2.4.6/bin/rake /home/gitpod/.rvm/rubies/ruby-2.4.6/bin/rdoc /home/gitpod/.rvm/rubies/ruby-2.4.6/bin/ri /home/gitpod/.rvm/rubies/ruby-2.4.6/bin/ruby
+++ for __file in "$@"
+++ [[ -x /home/gitpod/.rvm/rubies/ruby-2.4.6/bin/erb ]]
+++ for __file in "$@"
+++ [[ -x /home/gitpod/.rvm/rubies/ruby-2.4.6/bin/gem ]]
+++ for __file in "$@"
+++ [[ -x /home/gitpod/.rvm/rubies/ruby-2.4.6/bin/irb ]]
+++ for __file in "$@"
+++ [[ -x /home/gitpod/.rvm/rubies/ruby-2.4.6/bin/rake ]]
+++ for __file in "$@"
+++ [[ -x /home/gitpod/.rvm/rubies/ruby-2.4.6/bin/rdoc ]]
+++ for __file in "$@"
+++ [[ -x /home/gitpod/.rvm/rubies/ruby-2.4.6/bin/ri ]]
+++ for __file in "$@"
+++ [[ -x /home/gitpod/.rvm/rubies/ruby-2.4.6/bin/ruby ]]

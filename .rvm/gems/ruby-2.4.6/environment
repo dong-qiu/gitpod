@@ -1,0 +1,8 @@
+export PATH="/home/gitpod/.rvm/gems/ruby-2.4.6/bin:/home/gitpod/.rvm/gems/ruby-2.4.6@global/bin:/home/gitpod/.rvm/rubies/ruby-2.4.6/bin:$PATH"
+export GEM_HOME='/home/gitpod/.rvm/gems/ruby-2.4.6'
+export GEM_PATH='/home/gitpod/.rvm/gems/ruby-2.4.6:/home/gitpod/.rvm/gems/ruby-2.4.6@global'
+export MY_RUBY_HOME='/home/gitpod/.rvm/rubies/ruby-2.4.6'
+export IRBRC='/home/gitpod/.rvm/rubies/ruby-2.4.6/.irbrc'
+unset MAGLEV_HOME
+unset RBXOPT
+export RUBY_VERSION='ruby-2.4.6'

@@ -1,0 +1,6 @@
+./comments.go
+./conflict.go
+./embeddedtypes.go
+./methods.go
+./objects.go
+./typeswitch.go

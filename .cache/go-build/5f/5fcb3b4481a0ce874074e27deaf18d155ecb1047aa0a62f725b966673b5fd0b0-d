@@ -1,0 +1,9 @@
+./dirent.go
+./doc.go
+./inoWithIno.go
+./modeTypeWithType.go
+./nameWithoutNamlen.go
+./readdir.go
+./readdir_unix.go
+./symdir.go
+./walk.go

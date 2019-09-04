@@ -1,0 +1,14 @@
+current directory: /home/gitpod/.rvm/rubies/ruby-2.4.6/lib/ruby/gems/2.4.0/gems/gem-wrappers-1.4.0/ext/wrapper_generator
+/home/gitpod/.rvm/rubies/ruby-2.4.6/bin/ruby -I /home/gitpod/.rvm/rubies/ruby-2.4.6/lib/ruby/site_ruby/2.4.0 -r ./siteconf20190903-14806-4ayzuw.rb extconf.rb
+
+current directory: /home/gitpod/.rvm/rubies/ruby-2.4.6/lib/ruby/gems/2.4.0/gems/gem-wrappers-1.4.0/ext/wrapper_generator
+make "DESTDIR=" clean
+make: *** No rule to make target 'clean'.  Stop.
+
+current directory: /home/gitpod/.rvm/rubies/ruby-2.4.6/lib/ruby/gems/2.4.0/gems/gem-wrappers-1.4.0/ext/wrapper_generator
+make "DESTDIR="
+make: Nothing to be done for 'all'.
+
+current directory: /home/gitpod/.rvm/rubies/ruby-2.4.6/lib/ruby/gems/2.4.0/gems/gem-wrappers-1.4.0/ext/wrapper_generator
+make "DESTDIR=" install
+make: Nothing to be done for 'install'.

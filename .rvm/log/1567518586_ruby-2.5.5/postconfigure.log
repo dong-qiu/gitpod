@@ -1,0 +1,22 @@
+[2019-09-03 13:50:21] __rvm_post_configure_ruby
+__rvm_post_configure_ruby () 
+{ 
+    __rvm_post_configure_ruby_fix_athlon_sse2;
+    __rvm_post_configure_ruby_update_setup
+}
+current path: /home/gitpod/.rvm/src/ruby-2.5.5
+GEM_PATH=/home/gitpod/.rvm/gems/ruby-2.4.6:/home/gitpod/.rvm/gems/ruby-2.4.6@global
+GEM_HOME=/home/gitpod/.rvm/gems/ruby-2.4.6
+PATH=/home/gitpod/.rvm/gems/ruby-2.4.6/bin:/home/gitpod/.rvm/gems/ruby-2.4.6@global/bin:/home/gitpod/.rvm/rubies/ruby-2.4.6/bin:/home/gitpod/.rvm/bin:/home/gitpod/.sdkman/candidates/maven/current/bin:/home/gitpod/.sdkman/candidates/java/current/bin:/home/gitpod/.sdkman/candidates/gradle/current/bin:/home/gitpod/.pyenv/bin:/home/gitpod/.pyenv/shims:/home/gitpod/.nvm/versions/node/v10.15.3/bin:/workspace/go/bin:/home/gitpod/go/bin:/home/gitpod/go-packages/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+command(1): __rvm_post_configure_ruby
+++ __rvm_post_configure_ruby_fix_athlon_sse2
+++ [[ -f /proc/cpuinfo ]]
+++ [[ -f Makefile ]]
+++ __rvm_grep '^XCFLAGS = .*-msse2' Makefile
+++ GREP_OPTIONS=
+++ command grep '^XCFLAGS = .*-msse2' Makefile
+++ grep '^XCFLAGS = .*-msse2' Makefile
+++ return 1
+++ __rvm_post_configure_ruby_update_setup
+++ typeset option
+++ ((  0 == 1  ))

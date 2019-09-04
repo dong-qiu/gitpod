@@ -1,0 +1,5 @@
+./install.go
+./man.go
+./user.go
+./util.go
+./vimdoc.go

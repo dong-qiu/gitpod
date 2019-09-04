@@ -1,0 +1,5 @@
+./cgo.go
+./cgo_pkgconfig.go
+./doc.go
+./loader.go
+./util.go

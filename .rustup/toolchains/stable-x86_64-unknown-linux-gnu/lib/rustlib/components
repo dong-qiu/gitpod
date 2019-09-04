@@ -1,0 +1,8 @@
+rustc-x86_64-unknown-linux-gnu
+rust-std-x86_64-unknown-linux-gnu
+cargo-x86_64-unknown-linux-gnu
+rust-docs-x86_64-unknown-linux-gnu
+rls-preview-x86_64-unknown-linux-gnu
+rust-analysis-x86_64-unknown-linux-gnu
+rust-src
+rust-std-x86_64-unknown-linux-musl

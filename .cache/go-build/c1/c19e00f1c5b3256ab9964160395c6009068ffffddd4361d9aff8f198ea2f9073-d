@@ -1,0 +1,4 @@
+./auxv.go
+./doc.go
+./dynamic.go
+./regs.go

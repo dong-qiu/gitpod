@@ -1,0 +1,3 @@
+./buildutil.go
+./doc.go
+./importgraph.go

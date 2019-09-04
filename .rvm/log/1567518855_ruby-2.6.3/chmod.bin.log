@@ -1,0 +1,31 @@
+[2019-09-03 13:58:46] __rvm_set_executable
+__rvm_set_executable () 
+{ 
+    for __file in "$@";
+    do
+        [[ -x "${__file}" ]] || chmod +x "${__file}";
+    done
+}
+current path: /home/gitpod/.rvm/src/ruby-2.6.3
+GEM_PATH=/home/gitpod/.rvm/gems/ruby-2.5.5:/home/gitpod/.rvm/gems/ruby-2.5.5@global
+GEM_HOME=/home/gitpod/.rvm/gems/ruby-2.5.5
+PATH=/home/gitpod/.rvm/gems/ruby-2.5.5/bin:/home/gitpod/.rvm/gems/ruby-2.5.5@global/bin:/home/gitpod/.rvm/rubies/ruby-2.5.5/bin:/home/gitpod/.rvm/bin:/home/gitpod/.sdkman/candidates/maven/current/bin:/home/gitpod/.sdkman/candidates/java/current/bin:/home/gitpod/.sdkman/candidates/gradle/current/bin:/home/gitpod/.pyenv/bin:/home/gitpod/.pyenv/shims:/home/gitpod/.nvm/versions/node/v10.15.3/bin:/workspace/go/bin:/home/gitpod/go/bin:/home/gitpod/go-packages/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+command(10): __rvm_set_executable /home/gitpod/.rvm/rubies/ruby-2.6.3/bin/bundle /home/gitpod/.rvm/rubies/ruby-2.6.3/bin/bundler /home/gitpod/.rvm/rubies/ruby-2.6.3/bin/erb /home/gitpod/.rvm/rubies/ruby-2.6.3/bin/gem /home/gitpod/.rvm/rubies/ruby-2.6.3/bin/irb /home/gitpod/.rvm/rubies/ruby-2.6.3/bin/rake /home/gitpod/.rvm/rubies/ruby-2.6.3/bin/rdoc /home/gitpod/.rvm/rubies/ruby-2.6.3/bin/ri /home/gitpod/.rvm/rubies/ruby-2.6.3/bin/ruby
+++ for __file in "$@"
+++ [[ -x /home/gitpod/.rvm/rubies/ruby-2.6.3/bin/bundle ]]
+++ for __file in "$@"
+++ [[ -x /home/gitpod/.rvm/rubies/ruby-2.6.3/bin/bundler ]]
+++ for __file in "$@"
+++ [[ -x /home/gitpod/.rvm/rubies/ruby-2.6.3/bin/erb ]]
+++ for __file in "$@"
+++ [[ -x /home/gitpod/.rvm/rubies/ruby-2.6.3/bin/gem ]]
+++ for __file in "$@"
+++ [[ -x /home/gitpod/.rvm/rubies/ruby-2.6.3/bin/irb ]]
+++ for __file in "$@"
+++ [[ -x /home/gitpod/.rvm/rubies/ruby-2.6.3/bin/rake ]]
+++ for __file in "$@"
+++ [[ -x /home/gitpod/.rvm/rubies/ruby-2.6.3/bin/rdoc ]]
+++ for __file in "$@"
+++ [[ -x /home/gitpod/.rvm/rubies/ruby-2.6.3/bin/ri ]]
+++ for __file in "$@"
+++ [[ -x /home/gitpod/.rvm/rubies/ruby-2.6.3/bin/ruby ]]

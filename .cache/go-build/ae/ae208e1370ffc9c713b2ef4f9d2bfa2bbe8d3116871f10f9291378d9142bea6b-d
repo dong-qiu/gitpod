@@ -1,0 +1,10 @@
+./debug.go
+./errors.go
+./extractfunc.go
+./extractlocal.go
+./godoc.go
+./log.go
+./null.go
+./refactoring.go
+./rename.go
+./togglevar.go

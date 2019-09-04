@@ -1,0 +1,4 @@
+./deprecated.go
+./generated.go
+./purity.go
+./token.go

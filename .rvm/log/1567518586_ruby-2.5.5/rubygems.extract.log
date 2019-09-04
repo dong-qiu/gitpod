@@ -1,0 +1,82 @@
+[2019-09-03 13:54:04] __rvm_package_extract
+__rvm_package_extract () 
+{ 
+    rvm_debug __rvm_package_extract:$#: "$@";
+    \typeset __extract_src __extract_target __tempdir __path __file __return;
+    __extract_src="$1";
+    __extract_target="$2";
+    shift 2;
+    __return=0;
+    __tempdir="$( TMPDIR="${rvm_tmp_path}" mktemp -d -t rvm-tmp.XXXXXXXXX )";
+    __rvm_package_extract_run "$__extract_src" "$__tempdir" "$@" || __return=$?;
+    if (( __return == 0 )); then
+        for __path in "$__tempdir"/*;
+        do
+            __file="${__path##*/}";
+            if [[ -n "${__file}" && -e "$__extract_target/${__file}" ]]; then
+                \command \rm -rf "$__extract_target/${__file}" || __return=$?;
+            fi;
+            \command \mv -f "${__path}" "$__extract_target/" || __return=$?;
+        done;
+    fi;
+    if [[ -n "$__tempdir" ]]; then
+        \command \rm -rf "$__tempdir";
+    fi;
+    return $__return
+}
+current path: /home/gitpod/.rvm/src/ruby-2.5.5
+GEM_PATH=/home/gitpod/.rvm/gems/ruby-2.4.6:/home/gitpod/.rvm/gems/ruby-2.4.6@global
+GEM_HOME=/home/gitpod/.rvm/gems/ruby-2.4.6
+PATH=/home/gitpod/.rvm/gems/ruby-2.4.6/bin:/home/gitpod/.rvm/gems/ruby-2.4.6@global/bin:/home/gitpod/.rvm/rubies/ruby-2.4.6/bin:/home/gitpod/.rvm/bin:/home/gitpod/.sdkman/candidates/maven/current/bin:/home/gitpod/.sdkman/candidates/java/current/bin:/home/gitpod/.sdkman/candidates/gradle/current/bin:/home/gitpod/.pyenv/bin:/home/gitpod/.pyenv/shims:/home/gitpod/.nvm/versions/node/v10.15.3/bin:/workspace/go/bin:/home/gitpod/go/bin:/home/gitpod/go-packages/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+command(3): __rvm_package_extract /home/gitpod/.rvm/archives/rubygems-3.0.6.tgz /home/gitpod/.rvm/src
+++ rvm_debug __rvm_package_extract:2: /home/gitpod/.rvm/archives/rubygems-3.0.6.tgz /home/gitpod/.rvm/src
+++ ((  0  ))
+++ return 0
+++ typeset __extract_src __extract_target __tempdir __path __file __return
+++ __extract_src=/home/gitpod/.rvm/archives/rubygems-3.0.6.tgz
+++ __extract_target=/home/gitpod/.rvm/src
+++ shift 2
+++ __return=0
++++ TMPDIR=/home/gitpod/.rvm/tmp
++++ mktemp -d -t rvm-tmp.XXXXXXXXX
+++ __tempdir=/home/gitpod/.rvm/tmp/rvm-tmp.CSj7cGboU
+++ __rvm_package_extract_run /home/gitpod/.rvm/archives/rubygems-3.0.6.tgz /home/gitpod/.rvm/tmp/rvm-tmp.CSj7cGboU
+++ typeset __extract_run_src __extract_run_target __exclude_elements
+++ __extract_run_src=/home/gitpod/.rvm/archives/rubygems-3.0.6.tgz
+++ __extract_run_target=/home/gitpod/.rvm/tmp/rvm-tmp.CSj7cGboU
+++ shift 2
+++ __exclude_elements=()
+++ [[    != *\ \-\-\n\o\-\s\a\m\e\-\o\w\n\e\r\ * ]]
+++ __rvm_grep -- --no-same-owner
+++ GREP_OPTIONS=
+++ command grep -- --no-same-owner
+++ grep -- --no-same-owner
+++ __rvm_tar --help
+++ rvm_tar_options=--no-same-owner
+++ [[ -d /home/gitpod/.rvm/tmp/rvm-tmp.CSj7cGboU ]]
+++ case "$__extract_run_src" in
+++ __map_tar_excludes
+++ typeset __exclude_element
+++ [[ -n '' ]]
+++ __rvm_tar -xzf /home/gitpod/.rvm/archives/rubygems-3.0.6.tgz -C /home/gitpod/.rvm/tmp/rvm-tmp.CSj7cGboU --no-same-owner
+++ tar -xzf /home/gitpod/.rvm/archives/rubygems-3.0.6.tgz -C /home/gitpod/.rvm/tmp/rvm-tmp.CSj7cGboU --no-same-owner
+++ __rvm_fix_group_permissions /home/gitpod/.rvm/tmp/rvm-tmp.CSj7cGboU/rubygems-3.0.6
+++ umask -S
+++ __rvm_grep g=rw
+++ GREP_OPTIONS=
+++ command grep g=rw
+++ grep g=rw
+++ return 1
+++ ((  __return == 0  ))
+++ for __path in "$__tempdir"/*
+++ __file=rubygems-3.0.6
+++ [[ -n rubygems-3.0.6 ]]
+++ [[ -e /home/gitpod/.rvm/src/rubygems-3.0.6 ]]
+++ command rm -rf /home/gitpod/.rvm/src/rubygems-3.0.6
+++ rm -rf /home/gitpod/.rvm/src/rubygems-3.0.6
+++ command mv -f /home/gitpod/.rvm/tmp/rvm-tmp.CSj7cGboU/rubygems-3.0.6 /home/gitpod/.rvm/src/
+++ mv -f /home/gitpod/.rvm/tmp/rvm-tmp.CSj7cGboU/rubygems-3.0.6 /home/gitpod/.rvm/src/
+++ [[ -n /home/gitpod/.rvm/tmp/rvm-tmp.CSj7cGboU ]]
+++ command rm -rf /home/gitpod/.rvm/tmp/rvm-tmp.CSj7cGboU
+++ rm -rf /home/gitpod/.rvm/tmp/rvm-tmp.CSj7cGboU
+++ return 0

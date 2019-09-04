@@ -1,0 +1,7 @@
+./analysis.go
+./buildtag.go
+./doc.go
+./knowledge.go
+./lint.go
+./rules.go
+./structtag.go

@@ -1,0 +1,394 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Command-line arguments - The rustc book</title>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <base href="">
+
+        <link rel="stylesheet" href="book.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+
+        <link rel="shortcut icon" href="favicon.png">
+
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="_FontAwesome/css/font-awesome.css">
+
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+
+    </head>
+    <body class="light">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { } 
+            if (theme === null || theme === undefined) { theme = 'light'; }
+            document.body.className = theme;
+            document.querySelector('html').className = theme + ' js';
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <ol class="chapter"><li><a href="what-is-rustc.html"><strong aria-hidden="true">1.</strong> What is rustc?</a></li><li><a href="command-line-arguments.html" class="active"><strong aria-hidden="true">2.</strong> Command-line arguments</a></li><li><a href="lints/index.html"><strong aria-hidden="true">3.</strong> Lints</a></li><li><ol class="section"><li><a href="lints/levels.html"><strong aria-hidden="true">3.1.</strong> Lint levels</a></li><li><a href="lints/groups.html"><strong aria-hidden="true">3.2.</strong> Lint Groups</a></li><li><a href="lints/listing/index.html"><strong aria-hidden="true">3.3.</strong> Lint listing</a></li><li><ol class="section"><li><a href="lints/listing/allowed-by-default.html"><strong aria-hidden="true">3.3.1.</strong> Allowed-by-default lints</a></li><li><a href="lints/listing/warn-by-default.html"><strong aria-hidden="true">3.3.2.</strong> Warn-by-default lints</a></li><li><a href="lints/listing/deny-by-default.html"><strong aria-hidden="true">3.3.3.</strong> Deny-by-default lints</a></li></ol></li></ol></li><li><a href="codegen-options/index.html"><strong aria-hidden="true">4.</strong> Codegen options</a></li><li><a href="targets/index.html"><strong aria-hidden="true">5.</strong> Targets</a></li><li><ol class="section"><li><a href="targets/built-in.html"><strong aria-hidden="true">5.1.</strong> Built-in Targets</a></li><li><a href="targets/custom.html"><strong aria-hidden="true">5.2.</strong> Custom Targets</a></li></ol></li><li><a href="profile-guided-optimization.html"><strong aria-hidden="true">6.</strong> Profile-guided Optimization</a></li><li><a href="linker-plugin-lto.html"><strong aria-hidden="true">7.</strong> Linker-plugin based LTO</a></li><li><a href="contributing.html"><strong aria-hidden="true">8.</strong> Contributing to rustc</a></li></ol>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar" class="menu-bar">
+                    <div id="menu-bar-sticky-container">
+                        <div class="left-buttons">
+                            <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                                <i class="fa fa-bars"></i>
+                            </button>
+                            <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                                <i class="fa fa-paint-brush"></i>
+                            </button>
+                            <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                                <li role="none"><button role="menuitem" class="theme" id="light">Light <span class="default">(default)</span></button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                            </ul>
+                            
+                            <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                                <i class="fa fa-search"></i>
+                            </button>
+                            
+                        </div>
+
+                        <h1 class="menu-title">The rustc book</h1> 
+
+                        <div class="right-buttons">
+                            <a href="print.html" title="Print this book" aria-label="Print this book">
+                                <i id="print-button" class="fa fa-print"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <a class="header" href="command-line-arguments.html#command-line-arguments" id="command-line-arguments"><h1>Command-line arguments</h1></a>
+<p>Here's a list of command-line arguments to <code>rustc</code> and what they do.</p>
+<a class="header" href="command-line-arguments.html#a-h--help-get-help" id="a-h--help-get-help"><h2><code>-h</code>/<code>--help</code>: get help</h2></a>
+<p>This flag will print out help information for <code>rustc</code>.</p>
+<a class="header" href="command-line-arguments.html#a--cfg-configure-the-compilation-environment" id="a--cfg-configure-the-compilation-environment"><h2><code>--cfg</code>: configure the compilation environment</h2></a>
+<p>This flag can turn on or off various <code>#[cfg]</code> settings.</p>
+<p>The value can either be a single identifier or two identifiers separated by <code>=</code>.</p>
+<p>For examples, <code>--cfg 'verbose'</code> or <code>--cfg 'feature=&quot;serde&quot;'</code>. These correspond
+to <code>#[cfg(verbose)]</code> and <code>#[cfg(feature = &quot;serde&quot;)]</code> respectively.</p>
+<a class="header" href="command-line-arguments.html#a-l-add-a-directory-to-the-library-search-path" id="a-l-add-a-directory-to-the-library-search-path"><h2><code>-L</code>: add a directory to the library search path</h2></a>
+<p>When looking for external crates or libraries, a directory passed to this flag
+will be searched.</p>
+<p>The kind of search path can optionally be specified with the form <code>-L KIND=PATH</code> where <code>KIND</code> may be one of:</p>
+<ul>
+<li><code>dependency</code> — Only search for transitive dependencies in this directory.</li>
+<li><code>crate</code> — Only search for this crate's direct dependencies in this
+directory.</li>
+<li><code>native</code> — Only search for native libraries in this directory.</li>
+<li><code>framework</code> — Only search for macOS frameworks in this directory.</li>
+<li><code>all</code> — Search for all library kinds in this directory. This is the default
+if <code>KIND</code> is not specified.</li>
+</ul>
+<a class="header" href="command-line-arguments.html#a-l-link-the-generated-crate-to-a-native-library" id="a-l-link-the-generated-crate-to-a-native-library"><h2><code>-l</code>: link the generated crate to a native library</h2></a>
+<p>This flag allows you to specify linking to a specific native library when building
+a crate.</p>
+<p>The kind of library can optionally be specified with the form <code>-l KIND=lib</code>
+where <code>KIND</code> may be one of:</p>
+<ul>
+<li><code>dylib</code> — A native dynamic library.</li>
+<li><code>static</code> — A native static library (such as a <code>.a</code> archive).</li>
+<li><code>framework</code> — A macOS framework.</li>
+</ul>
+<p>The kind of library can be specified in a <a href="../reference/items/external-blocks.html#the-link-attribute"><code>#[link]</code>
+attribute</a>. If the kind is not specified in the <code>link</code>
+attribute or on the command-line, it will link a dynamic library if available,
+otherwise it will use a static library. If the kind is specified on the
+command-line, it will override the kind specified in a <code>link</code> attribute.</p>
+<p>The name used in a <code>link</code> attribute may be overridden using the form <code>-l ATTR_NAME:LINK_NAME</code> where <code>ATTR_NAME</code> is the name in the <code>link</code> attribute,
+and <code>LINK_NAME</code> is the name of the actual library that will be linked.</p>
+<a class="header" href="command-line-arguments.html#a--crate-type-a-list-of-types-of-crates-for-the-compiler-to-emit" id="a--crate-type-a-list-of-types-of-crates-for-the-compiler-to-emit"><h2><code>--crate-type</code>: a list of types of crates for the compiler to emit</h2></a>
+<p>This instructs <code>rustc</code> on which crate type to build. This flag accepts a
+comma-separated list of values, and may be specified multiple times. The valid
+crate types are:</p>
+<ul>
+<li><code>lib</code> — Generates a library kind preferred by the compiler, currently
+defaults to <code>rlib</code>.</li>
+<li><code>rlib</code> — A Rust static library.</li>
+<li><code>staticlib</code> — A native static library.</li>
+<li><code>dylib</code> — A Rust dynamic library.</li>
+<li><code>cdylib</code> — A native dynamic library.</li>
+<li><code>bin</code> — A runnable executable program.</li>
+<li><code>proc-macro</code> — Generates a format suitable for a procedural macro library
+that may be loaded by the compiler.</li>
+</ul>
+<p>The crate type may be specified with the <a href="../reference/linkage.html"><code>crate_type</code> attribute</a>.
+The <code>--crate-type</code> command-line value will override the <code>crate_type</code>
+attribute.</p>
+<p>More details may be found in the <a href="../reference/linkage.html">linkage chapter</a> of the reference.</p>
+<a class="header" href="command-line-arguments.html#a--crate-name-specify-the-name-of-the-crate-being-built" id="a--crate-name-specify-the-name-of-the-crate-being-built"><h2><code>--crate-name</code>: specify the name of the crate being built</h2></a>
+<p>This informs <code>rustc</code> of the name of your crate.</p>
+<a class="header" href="command-line-arguments.html#a--edition-specify-the-edition-to-use" id="a--edition-specify-the-edition-to-use"><h2><code>--edition</code>: specify the edition to use</h2></a>
+<p>This flag takes a value of <code>2015</code> or <code>2018</code>. The default is <code>2015</code>. More
+information about editions may be found in the <a href="../edition-guide/introduction.html">edition guide</a>.</p>
+<a class="header" href="command-line-arguments.html#a--emit-specifies-the-types-of-output-files-to-generate" id="a--emit-specifies-the-types-of-output-files-to-generate"><h2><code>--emit</code>: specifies the types of output files to generate</h2></a>
+<p>This flag controls the types of output files generated by the compiler. It
+accepts a comma-separated list of values, and may be specified multiple times.
+The valid emit kinds are:</p>
+<ul>
+<li><code>asm</code> — Generates a file with the crate's assembly code. The default output
+filename is <code>CRATE_NAME.s</code>.</li>
+<li><code>dep-info</code> — Generates a file with Makefile syntax that indicates all the
+source files that were loaded to generate the crate. The default output
+filename is <code>CRATE_NAME.d</code>.</li>
+<li><code>link</code> — Generates the crates specified by <code>--crate-type</code>. The default
+output filenames depend on the crate type and platform. This is the default
+if <code>--emit</code> is not specified.</li>
+<li><code>llvm-bc</code> — Generates a binary file containing the <a href="https://llvm.org/docs/BitCodeFormat.html">LLVM bitcode</a>. The
+default output filename is <code>CRATE_NAME.bc</code>.</li>
+<li><code>llvm-ir</code> — Generates a file containing <a href="https://llvm.org/docs/LangRef.html">LLVM IR</a>. The default output
+filename is <code>CRATE_NAME.ll</code>.</li>
+<li><code>metadata</code> — Generates a file containing metadata about the crate. The
+default output filename is <code>CRATE_NAME.rmeta</code>.</li>
+<li><code>mir</code> — Generates a file containing rustc's mid-level intermediate
+representation. The default output filename is <code>CRATE_NAME.mir</code>.</li>
+<li><code>obj</code> — Generates a native object file. The default output filename is
+<code>CRATE_NAME.o</code>.</li>
+</ul>
+<p>The output filename can be set with the <code>-o</code> flag. A suffix may be added to
+the filename with the <code>-C extra-filename</code> flag. The files are written to the
+current directory unless the <code>--out-dir</code> flag is used. Each emission type may
+also specify the output filename with the form <code>KIND=PATH</code>, which takes
+precedence over the <code>-o</code> flag.</p>
+<a class="header" href="command-line-arguments.html#a--print-print-compiler-information" id="a--print-print-compiler-information"><h2><code>--print</code>: print compiler information</h2></a>
+<p>This flag prints out various information about the compiler. This flag may be
+specified multiple times, and the information is printed in the order the
+flags are specified. Specifying a <code>--print</code> flag will usually disable the
+<code>--emit</code> step and will only print the requested information. The valid types
+of print values are:</p>
+<ul>
+<li><code>crate-name</code> — The name of the crate.</li>
+<li><code>file-names</code> — The names of the files created by the <code>link</code> emit kind.</li>
+<li><code>sysroot</code> — Path to the sysroot.</li>
+<li><code>cfg</code> — List of cfg values. See <a href="../reference/conditional-compilation.html">conditional compilation</a> for more
+information about cfg values.</li>
+<li><code>target-list</code> — List of known targets. The target may be selected with the
+<code>--target</code> flag.</li>
+<li><code>target-cpus</code> — List of available CPU values for the current target. The
+target CPU may be selected with the <code>-C target-cpu=val</code> flag.</li>
+<li><code>target-features</code> — List of available target features for the current
+target. Target features may be enabled with the <code>-C target-feature=val</code>
+flag.</li>
+<li><code>relocation-models</code> — List of relocation models. Relocation models may be
+selected with the <code>-C relocation-model=val</code> flag.</li>
+<li><code>code-models</code> — List of code models. Code models may be selected with the
+<code>-C code-model=val</code> flag.</li>
+<li><code>tls-models</code> — List of Thread Local Storage models supported. The model may
+be selected with the <code>-Z tls-model=val</code> flag.</li>
+<li><code>native-static-libs</code> — This may be used when creating a <code>staticlib</code> crate
+type. If this is the only flag, it will perform a full compilation and
+include a diagnostic note that indicates the linker flags to use when
+linking the resulting static library. The note starts with the text
+<code>native-static-libs:</code> to make it easier to fetch the output.</li>
+</ul>
+<a class="header" href="command-line-arguments.html#a-g-include-debug-information" id="a-g-include-debug-information"><h2><code>-g</code>: include debug information</h2></a>
+<p>A synonym for <code>-C debuginfo=2</code>, for more see <a href="codegen-options/index.html#debuginfo">here</a>.</p>
+<a class="header" href="command-line-arguments.html#a-o-optimize-your-code" id="a-o-optimize-your-code"><h2><code>-O</code>: optimize your code</h2></a>
+<p>A synonym for <code>-C opt-level=2</code>, for more see <a href="codegen-options/index.html#opt-level">here</a>.</p>
+<a class="header" href="command-line-arguments.html#a-o-filename-of-the-output" id="a-o-filename-of-the-output"><h2><code>-o</code>: filename of the output</h2></a>
+<p>This flag controls the output filename.</p>
+<a class="header" href="command-line-arguments.html#a--out-dir-directory-to-write-the-output-in" id="a--out-dir-directory-to-write-the-output-in"><h2><code>--out-dir</code>: directory to write the output in</h2></a>
+<p>The outputted crate will be written to this directory. This flag is ignored if
+the <code>-o</code> flag is used.</p>
+<a class="header" href="command-line-arguments.html#a--explain-provide-a-detailed-explanation-of-an-error-message" id="a--explain-provide-a-detailed-explanation-of-an-error-message"><h2><code>--explain</code>: provide a detailed explanation of an error message</h2></a>
+<p>Each error of <code>rustc</code>'s comes with an error code; this will print
+out a longer explanation of a given error.</p>
+<a class="header" href="command-line-arguments.html#a--test-build-a-test-harness" id="a--test-build-a-test-harness"><h2><code>--test</code>: build a test harness</h2></a>
+<p>When compiling this crate, <code>rustc</code> will ignore your <code>main</code> function
+and instead produce a test harness.</p>
+<a class="header" href="command-line-arguments.html#a--target-select-a-target-triple-to-build" id="a--target-select-a-target-triple-to-build"><h2><code>--target</code>: select a target triple to build</h2></a>
+<p>This controls which <a href="targets/index.html">target</a> to produce.</p>
+<a class="header" href="command-line-arguments.html#a-w-set-lint-warnings" id="a-w-set-lint-warnings"><h2><code>-W</code>: set lint warnings</h2></a>
+<p>This flag will set which lints should be set to the <a href="lints/levels.html#warn">warn level</a>.</p>
+<a class="header" href="command-line-arguments.html#a-a-set-lint-allowed" id="a-a-set-lint-allowed"><h2><code>-A</code>: set lint allowed</h2></a>
+<p>This flag will set which lints should be set to the <a href="lints/levels.html#allow">allow level</a>.</p>
+<a class="header" href="command-line-arguments.html#a-d-set-lint-denied" id="a-d-set-lint-denied"><h2><code>-D</code>: set lint denied</h2></a>
+<p>This flag will set which lints should be set to the <a href="lints/levels.html#deny">deny level</a>.</p>
+<a class="header" href="command-line-arguments.html#a-f-set-lint-forbidden" id="a-f-set-lint-forbidden"><h2><code>-F</code>: set lint forbidden</h2></a>
+<p>This flag will set which lints should be set to the <a href="lints/levels.html#forbid">forbid level</a>.</p>
+<a class="header" href="command-line-arguments.html#a-z-set-unstable-options" id="a-z-set-unstable-options"><h2><code>-Z</code>: set unstable options</h2></a>
+<p>This flag will allow you to set unstable options of rustc. In order to set multiple options,
+the -Z flag can be used multiple times. For example: <code>rustc -Z verbose -Z time</code>.
+Specifying options with -Z is only available on nightly. To view all available options
+run: <code>rustc -Z help</code>.</p>
+<a class="header" href="command-line-arguments.html#a--cap-lints-set-the-most-restrictive-lint-level" id="a--cap-lints-set-the-most-restrictive-lint-level"><h2><code>--cap-lints</code>: set the most restrictive lint level</h2></a>
+<p>This flag lets you 'cap' lints, for more, <a href="lints/levels.html#capping-lints">see here</a>.</p>
+<a class="header" href="command-line-arguments.html#a-c--codegen-code-generation-options" id="a-c--codegen-code-generation-options"><h2><code>-C</code>/<code>--codegen</code>: code generation options</h2></a>
+<p>This flag will allow you to set <a href="codegen-options/index.html">codegen options</a>.</p>
+<a class="header" href="command-line-arguments.html#a-v--version-print-a-version" id="a-v--version-print-a-version"><h2><code>-V</code>/<code>--version</code>: print a version</h2></a>
+<p>This flag will print out <code>rustc</code>'s version.</p>
+<a class="header" href="command-line-arguments.html#a-v--verbose-use-verbose-output" id="a-v--verbose-use-verbose-output"><h2><code>-v</code>/<code>--verbose</code>: use verbose output</h2></a>
+<p>This flag, when combined with other flags, makes them produce extra output.</p>
+<a class="header" href="command-line-arguments.html#a--extern-specify-where-an-external-library-is-located" id="a--extern-specify-where-an-external-library-is-located"><h2><code>--extern</code>: specify where an external library is located</h2></a>
+<p>This flag allows you to pass the name and location of an external crate that
+will be linked into the crate you are building. This flag may be specified
+multiple times. The format of the value should be <code>CRATENAME=PATH</code>.</p>
+<a class="header" href="command-line-arguments.html#a--sysroot-override-the-system-root" id="a--sysroot-override-the-system-root"><h2><code>--sysroot</code>: Override the system root</h2></a>
+<p>The &quot;sysroot&quot; is where <code>rustc</code> looks for the crates that come with the Rust
+distribution; this flag allows that to be overridden.</p>
+<a class="header" href="command-line-arguments.html#a--error-format-control-how-errors-are-produced" id="a--error-format-control-how-errors-are-produced"><h2><code>--error-format</code>: control how errors are produced</h2></a>
+<p>This flag lets you control the format of messages. Messages are printed to
+stderr. The valid options are:</p>
+<ul>
+<li><code>human</code> — Human-readable output. This is the default.</li>
+<li><code>json</code> — Structured JSON output.</li>
+<li><code>short</code> — Short, one-line messages.</li>
+</ul>
+<a class="header" href="command-line-arguments.html#a--color-configure-coloring-of-output" id="a--color-configure-coloring-of-output"><h2><code>--color</code>: configure coloring of output</h2></a>
+<p>This flag lets you control color settings of the output. The valid options
+are:</p>
+<ul>
+<li><code>auto</code> — Use colors if output goes to a tty. This is the default.</li>
+<li><code>always</code> — Always use colors.</li>
+<li><code>never</code> — Never colorize output.</li>
+</ul>
+<a class="header" href="command-line-arguments.html#a--remap-path-prefix-remap-source-names-in-output" id="a--remap-path-prefix-remap-source-names-in-output"><h2><code>--remap-path-prefix</code>: remap source names in output</h2></a>
+<p>Remap source path prefixes in all output, including compiler diagnostics,
+debug information, macro expansions, etc. It takes a value of the form
+<code>FROM=TO</code> where a path prefix equal to <code>FROM</code> is rewritten to the value <code>TO</code>.
+The <code>FROM</code> may itself contain an <code>=</code> symbol, but the <code>TO</code> value may not. This
+flag may be specified multiple times.</p>
+<p>This is useful for normalizing build products, for example by removing the
+current directory out of pathnames emitted into the object files. The
+replacement is purely textual, with no consideration of the current system's
+pathname syntax. For example <code>--remap-path-prefix foo=bar</code> will match
+<code>foo/lib.rs</code> but not <code>./foo/lib.rs</code>.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="what-is-rustc.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="lints/index.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a href="what-is-rustc.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a href="lints/index.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+
+        
+        <script src="searchindex.js" type="text/javascript" charset="utf-8"></script>
+        
+        
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+    </body>
+</html>

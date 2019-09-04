@@ -1,0 +1,7 @@
+./checkstyle.go
+./codeclimate.go
+./json.go
+./junitxml.go
+./printer.go
+./tab.go
+./text.go

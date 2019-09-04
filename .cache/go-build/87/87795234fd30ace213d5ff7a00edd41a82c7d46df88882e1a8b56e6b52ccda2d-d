@@ -1,0 +1,3 @@
+./config.go
+./config_gocritic.go
+./reader.go

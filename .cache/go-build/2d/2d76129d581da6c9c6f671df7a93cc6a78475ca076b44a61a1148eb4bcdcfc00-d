@@ -1,0 +1,4 @@
+./config.go
+./context.go
+./linter.go
+./metalinter.go
